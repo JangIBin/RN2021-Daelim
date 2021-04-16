@@ -11,6 +11,7 @@ import type {Node} from 'react';
 import Heading from './Heading'
 import Input from './Input'
 import Button from './Button'
+import TodoList from './TodoList'
 
 import {
   SafeAreaView,
@@ -40,6 +41,8 @@ class App extends Component {
     type: 'All'
   }
   this.submitTodo = this.submitTodo.bind(this);
+  this.toggleComplete = this.toggleComplete.bind(this);
+  this.deleteTodo = this.deleteTodo.bind(this);
  }
  inputChange(inputValue) {    
     console.log(' Input Value: ' , inputValue);    
@@ -55,24 +58,44 @@ class App extends Component {
      todoIndex,    
      complete: false    
    }    
-   todoIndex++    
+   todoIndex++
    const todos = [...this.state.todos, todo]    
    this.setState({ todos, inputValue: '' }, () => {    
      console.log('State: ', this.state)    
    }) 
  }
 
+ deleteTodo = (todoIndex) => {
+   let {todos} = this.state
+   todos = todos.filter((todo) => todo.todoIndex !== todoIndex)
+   this.setState({todos})
+ }
+
+ toggleComplete = (todoIndex) => {
+   let todos = this.state.todos
+   todos.forEach((todo) => {
+     if(todo.todoIndex === todoIndex) {
+       todo.complete = !todo.complete
+     }
+   })
+   this.setState({todos})
+ }
+
  render() {
-   const { inputValue } = this.state
+   const { inputValue, todos } = this.state
    return (
      <View style={styles.container}>
        <ScrollView
          keyboardShouldPersistTaps='always'
          style={styles.content}>
          <Heading />
-         <Input 
-           inputValue={inputValue}    
+         <Input
+           inputValue={inputValue}
            inputChange={(text) => this.inputChange(text)} />
+           <TodoList
+            toggleComplete={this.toggleComplete}
+            deleteTodo={this.deleteTodo}
+            todos={todos} />
            <Button submitTodo={this.submitTodo} />
        </ScrollView>
      </View>
