@@ -12,6 +12,7 @@ import Heading from './Heading'
 import Input from './Input'
 import Button from './Button'
 import TodoList from './TodoList'
+import TabBar from './TabBar'
 
 import {
   SafeAreaView,
@@ -43,6 +44,7 @@ class App extends Component {
   this.submitTodo = this.submitTodo.bind(this);
   this.toggleComplete = this.toggleComplete.bind(this);
   this.deleteTodo = this.deleteTodo.bind(this);
+  this.setType = this.setType.bind(this);
  }
  inputChange(inputValue) {    
     console.log(' Input Value: ' , inputValue);    
@@ -81,8 +83,12 @@ class App extends Component {
    this.setState({todos})
  }
 
+ setType = (type) => {
+   this.setState({type})
+ }
+
  render() {
-   const { inputValue, todos } = this.state
+   const { inputValue, todos, type } = this.state
    return (
      <View style={styles.container}>
        <ScrollView
@@ -98,6 +104,7 @@ class App extends Component {
             todos={todos} />
            <Button submitTodo={this.submitTodo} />
        </ScrollView>
+       <TabBar type={type} setType={this.setType} />
      </View>
    )
  }
