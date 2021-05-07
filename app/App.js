@@ -1,124 +1,36 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+// 예제 4.6 - 밝은 색과 어두운 색을 토글하는 앱
+import React, { Component } from 'react'
+import { StyleSheet, View, Button } from 'react-native'
+// 외부로 분리해둔 getStyleSheet 함수 가져오기
+import getStyleSheet from './styles' 
 
-import React, {Component} from 'react';
-import type {Node} from 'react';
-import Heading from './Heading'
-import Input from './Input'
-import Button from './Button'
-import TodoList from './TodoList'
-import TabBar from './TabBar'
-
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-let todoIndex = 0;
-class App extends Component {
- constructor() {
-  super()
-  this.state = {
-    inputValue: '',
-    todos: [],
-    type: 'All'
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    // 기본 테마 색을 밝은 색으로 컴포넌트의 state 초기화하기
+    this.state = {
+      darkTheme: false
+    }
+    // 예외가 발생하지 않도록 toggleTheme함수를 컴포넌트에 bind
+    this.toggleTheme = this.toggleTheme.bind(this);
   }
-  this.submitTodo = this.submitTodo.bind(this);
-  this.toggleComplete = this.toggleComplete.bind(this);
-  this.deleteTodo = this.deleteTodo.bind(this);
-  this.setType = this.setType.bind(this);
- }
- inputChange(inputValue) {    
-    console.log(' Input Value: ' , inputValue);    
-    this.setState({ inputValue })    
- }
 
- submitTodo = () => {    
-   if (this.state.inputValue.match(/^\s*$/)) {    
-     return    
-   }    
-   const todo = {    
-     title: this.state.inputValue,    
-     todoIndex,    
-     complete: false    
-   }    
-   todoIndex++
-   const todos = [...this.state.todos, todo]    
-   this.setState({ todos, inputValue: '' }, () => {    
-     console.log('State: ', this.state)    
-   }) 
- }
+  toggleTheme() {
+    // 호출할 때마다 스타일을 toggle
+    this.setState({darkTheme: !this.state.darkTheme})
+  }
 
- deleteTodo = (todoIndex) => {
-   let {todos} = this.state
-   todos = todos.filter((todo) => todo.todoIndex !== todoIndex)
-   this.setState({todos})
- }
-
- toggleComplete = (todoIndex) => {
-   let todos = this.state.todos
-   todos.forEach((todo) => {
-     if(todo.todoIndex === todoIndex) {
-       todo.complete = !todo.complete
-     }
-   })
-   this.setState({todos})
- }
-
- setType = (type) => {
-   this.setState({type})
- }
-
- render() {
-   const { inputValue, todos, type } = this.state
-   return (
-     <View style={styles.container}>
-       <ScrollView
-         keyboardShouldPersistTaps='always'
-         style={styles.content}>
-         <Heading />
-         <Input
-           inputValue={inputValue}
-           inputChange={(text) => this.inputChange(text)} />
-           <TodoList
-            toggleComplete={this.toggleComplete}
-            deleteTodo={this.deleteTodo}
-            todos={todos} />
-           <Button submitTodo={this.submitTodo} />
-       </ScrollView>
-       <TabBar type={type} setType={this.setType} />
-     </View>
-   )
- }
+  render() {
+    // 표시할 테마에 적합한 스타일시트를 가져오기 위해 getStyleSheet 함수 사용
+    const styles = getStyleSheet(this.state.darkTheme);
+    // backgroundColor를 쉽게 사용하기 위해서 StyleSheet의 flatten을 이용함
+    const backgroundColor = StyleSheet.flatten(styles.container).backgroundColor;
+    return (
+      <View style={styles.container}>
+        <View style={styles.box}>
+          <Button title={backgroundColor} onPress={this.toggleTheme} />
+        </View>
+      </View>
+    )
+  }
 }
-
-const styles = StyleSheet.create({
- container: {
-   flex: 1,
-   backgroundColor: '#f5f5f5'
- },
- content: {
-   flex: 1,
-   paddingTop: 60
- }
-})
-
-export default App;

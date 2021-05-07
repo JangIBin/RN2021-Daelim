@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import Todo from './Todo'
 
 const TodoList = ({ todos, deleteTodo, toggleComplete, type }) => {
-    const getVisibleTodos = (todos, type) => {
+    const getVisibleTodos = (todo`s`, type) => {
       switch (type) {
         case 'All':
           return todos
