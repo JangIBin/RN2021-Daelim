@@ -1,36 +1,59 @@
-// 예제 4.6 - 밝은 색과 어두운 색을 토글하는 앱
-import React, { Component } from 'react'
-import { StyleSheet, View, Button } from 'react-native'
-// 외부로 분리해둔 getStyleSheet 함수 가져오기
-import getStyleSheet from './styles' 
+// 예제 4.7 - 프로필 카드 배경 설정하기
+import React, {Component} from 'react'
+import {Image, StyleSheet, View} from 'react-native'
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    // 기본 테마 색을 밝은 색으로 컴포넌트의 state 초기화하기
-    this.state = {
-      darkTheme: false
-    }
-    // 예외가 발생하지 않도록 toggleTheme함수를 컴포넌트에 bind
-    this.toggleTheme = this.toggleTheme.bind(this);
-  }
-
-  toggleTheme() {
-    // 호출할 때마다 스타일을 toggle
-    this.setState({darkTheme: !this.state.darkTheme})
-  }
-
+class App extends Component {
   render() {
-    // 표시할 테마에 적합한 스타일시트를 가져오기 위해 getStyleSheet 함수 사용
-    const styles = getStyleSheet(this.state.darkTheme);
-    // backgroundColor를 쉽게 사용하기 위해서 StyleSheet의 flatten을 이용함
-    const backgroundColor = StyleSheet.flatten(styles.container).backgroundColor;
     return (
       <View style={styles.container}>
-        <View style={styles.box}>
-          <Button title={backgroundColor} onPress={this.toggleTheme} />
+        <View style={styles.cardContainer}>
+          <View style={styles.cardImageContainer}>
+            <Image style={styles.cardImage} 
+              source={require('./user.png')} />
+          </View>
         </View>
       </View>
     )
   }
 }
+
+const profilecardColor = 'dodgerblue';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  cardContainer: {
+    // 예제 4.14 - 프로필 카드 레이아웃 수정하기
+    alignItems: 'center',
+    // 예제 4.10 - 프로필 카드 border 속성 적용하기
+    borderColor: 'black',
+    borderWidth: 3,
+    borderStyle: 'solid',
+    borderRadius: 20,
+    backgroundColor: profilecardColor,
+    width: 300,
+    height: 400
+  },
+  // 예제 4.10 - 프로필 카드 이미지 적용하기
+  cardImageContainer: {  
+    alignItems: 'center',     
+    backgroundColor: 'white',
+    borderWidth: 3,
+    borderColor: 'black',
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    // 예제 4.14 - 프로필 카드 레이아웃 수정하기
+    marginTop: 30,
+    paddingTop: 15
+  }, 
+  cardImage: {        
+    width: 80,
+    height: 80
+  } 
+});
+
+export default App

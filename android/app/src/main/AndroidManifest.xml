@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.daelim2021_react_native">
+  package="com.rn2021">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

@@ -131,7 +131,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.daelim2021_react_native"
+        applicationId "com.rn2021"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
