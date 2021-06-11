@@ -2,6 +2,52 @@
 ## 201930429 장이빈
 React Native 2021
 
+## 06월 04일
+> Redux
+# 1. Redux란
+- "JavaScript 앱을 위한 예측 가능한 state 컨테이너"로 정의한다.
+
+# React Redux의 특징
+- 앱에 단 하나밖에 없는 전역 상태의 객체이다.
+- 전역 state 객체는 React Native 컴포넌트에서 props로 전달된다.
+- Redux state의 데이터가 변경되면, 변경된 새 데이터가 전체 앱에 props로 전달된다.
+- 앱의 state를 모두 store라는 곳으로 이동시켜 데이터 관리를 편리하게 한다.
+- React의 context라는 기능을 이용해서 동작한다.
+- 여기서 context는 전역 state를 만들고 관리하는 메커니즘이다.
+
+## 05월 28일
+> 네비게이션
+
+# 1. 네비게이션의 개요
+- 네비게이션에 관한 기본적인 설명 및 종류에 대한 내용은 하단의 5월 21일 readme.md의 '네비게이션 사용하기'를 참고
+- React Native에서는 네비게이션 라이브러리를 지원하지 않기 때문에 third party 네비게이션 라이브러리를 사용해야 한다.
+- 현재 프로젝트에서 사용하는 React Navigation은 자바스크립트로 구현되어있으며, React Native의 개발진이 추천하는 라이브러리이다.
+## 05월 21일
+1. git graph 활용하기
+- 이전 커밋으로 돌아가고 싶을 때 git의 checkout을 사용하는데, git graph를 사용하여 보는 것이 편리하다.
+- git graph는 본인의 커밋이 현재 어디에 있는지를 확인할 수 있다.
+- checkout 사용 시 코드를 수정할 경우, **master와 원격 저장소의 코드가 달라 충돌**할 수 있으므로 되도록이면 수정하지 않는 것이 좋다.
+
+2. Text 컴포넌트 VS View 컴포넌트
+- flex 속성을 제외하고는 View에서 사용되는 대부분의 스타일을 Text에서도 사용할 수 있다.
+- 반대로 Text에서 사용하는 스타일을 View에서는 사용할 수 없다.
+
+3. font family 지정하기
+- css와는 다르게 fontFamily 속성에 여러개의 폰트를 지정할 수 없다.
+- iOS에서는 monospace 옵션을 사용할 수 없으며, 사용할 경우 아래와 같은 오류가 발생한다.
+
+> 고급 스타일링 소개
+1. 플랫폼별 크기 및 스타일
+- 디스플레이의 물리적 속성에는 화면 크기, 해상도 등이 있다.
+- 플랫폼별 크기 단위에는 Pixels, points, DPs가 있다.
+2. ShadowPropTypesIOS 및 Elevation으로 그림자 만들기
+- iOS에서는 ShadowPropTypesIOS 스타일을 사용하여 그림자를 추가 할 수 있고, Android에서는 Elevation을 사용하여 그림자를 만들 수 있다.
+- 그림자를 넣을 때는 Platform.select를 사용한다.
+
+- 앱의 핵심 기능 중 하나로, 네비게이션의 종류에는 3가지가 있다.
+- React Native에는 네비게이션 라이브러리가 포함되어 있지 않다.
+- 따라서 React Native에서 네비게이션을 사용할 때는 개발자들이 개발하고 관리하는 오픈소스 라이브러리인 Wix를 이용한다.
+
 
 ## 05월 14일
 > 스타일링 소개 2
